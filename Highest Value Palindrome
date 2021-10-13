@@ -1,0 +1,44 @@
+string highestValuePalindrome(string s, int n, int k) {
+  bool *p=new bool [n];
+       
+       for (int i=0; i<(n/2) && k!= -1; i++) {
+           p[i]=p[n-1-i]=false;
+            if (s[i]!=s[n-1-i]) {
+                if(s[i]>s[n-1-i]){
+                s[n-1-i]=s[i];
+                k--;
+                p[n-1-i]= true;
+                }
+            
+            else{
+            s[i]=s[n-1-i];
+            k--;
+            p[i]=true;
+       }
+       }
+       }
+       if (k < 0) {
+       delete [] p;
+       return "-1";}
+    int i=0;
+    while ((k!=0) && i<=n/2) {
+        
+        if ((p[i] || p[n-1-i])== true && s[i]!='9') {
+        s[i] = s[n-1-i] = '9'; 
+       
+        k--; 
+        }
+        
+        else if (i==(n-1-i) && s[i]!='9') {
+        s[i]='9';
+        k--;
+        }
+        else if (((p[i]&& p[n-1-i]) != true) && s[i]!='9' && k>=2) {
+        s[i] = s[n-1-i] = '9'; 
+        k-=2;
+        }
+         i++;
+    }
+    delete [] p;
+    return s;
+}
